@@ -1,36 +1,37 @@
-name: 'ftp-transfer-action'
+name: 'Secure FTP Transfer'
+description: 'This action transfers files between the local environment and a remote FTP server using secure protocols.'
 author: 'Ercin Dedeoglu <e.dedeoglu@gmail.com>'
-description: 'This GitHub Action allows you to automate the process of transferring files via FTP.'
 inputs:
   host:
-    description: 'FTP host'
+    description: 'The FTP server hostname. Example: ftp.example.com'
     required: true
   user:
-    description: 'FTP user'
+    description: 'The username for the FTP server. Example: user123'
     required: true
   password:
-    description: 'FTP password'
+    description: 'The password for the FTP server. It is recommended to use secrets for this input.'
     required: true
   forceSsl:
-    description: 'Force SSL encryption'
+    description: 'Enforce SSL encryption for the connection. Defaults to true for security.'
     required: false
-    default: 'false'
+    default: 'true'
   localDir:
-    description: 'Local directory'
+    description: 'The local directory to transfer files from. Defaults to the current directory. Example: ./build/'
     required: false
     default: '.'
   remoteDir:
-    description: 'Remote directory'
+    description: 'The remote directory to transfer files to. Defaults to the root directory. Example: /public_html/'
     required: false
     default: '.'
   options:
-    description: 'Additional mirror command options'
+    description: 'Additional options for the lftp mirror command. Example: --only-newer'
     required: false
-    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
+outputs:
+  file_count:
+    description: 'The number of files transferred.'
 branding:
-  color: 'red'
+  color: 'blue'
   icon: 'upload-cloud'
-  
